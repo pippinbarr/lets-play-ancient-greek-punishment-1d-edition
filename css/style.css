@@ -5,18 +5,27 @@ it buddy.
 
 **********************************************/
 
+html,
 body {
   padding: 0;
   margin: 0;
   overflow: hidden;
   user-select: none;
   touch-action: manipulation;
+  height: 100vh;
+  width: 100vw;
+  background-color: red;
+
+  /* Flex stuff... */
+  display: flex;
+  align-items: center;
+  /* Centers items vertically */
+  justify-content: center;
+  /* Centers items horizontally (optional) */
+  height: 100%;
+  /* Example: full viewport height */
 }
 
 body::-webkit-scrollbar {
   display: none;
-}
-
-canvas {
-  position: fixed;
 }
