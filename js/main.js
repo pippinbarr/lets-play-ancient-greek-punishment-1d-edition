@@ -10,17 +10,19 @@
 
 let canvas = undefined; // A reference to the canvas for scaling with CSS
 
+let state = undefined; // This will be our state handling
 
 /**
  * Create the canvas, probably more
  */
 function setup() {
+    // Create the canvas at our aspect ratio
     canvas = createCanvas(9 * 64, 16 * 64);
-    canvas.removeClass("p5Canvas");
-    canvas.id("boo");
-
+    // Trigger window resizing so it scales
     windowResized();
-    console.log(width, height);
+
+    // Start in the menu state
+    state = new Menu();
 }
 
 /**
@@ -28,8 +30,15 @@ function setup() {
  */
 function draw() {
     background(0);
+
+    state.update();
 }
 
+/**
+ * Called when there's any change to the window size and scales the canvas
+ * to fit with its aspect ratio preserved. Doing this so I don't have an actually
+ * size-changing canvas, just scaling in CSS
+ */
 function windowResized() {
     // Compare the ratios to figure out which was to stretch the canvas proportionally
     if (windowWidth / windowHeight > 9 / 16 && windowHeight / windowWidth < 16 / 9) {
