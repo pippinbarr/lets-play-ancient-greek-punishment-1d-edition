@@ -17,12 +17,12 @@ let state = undefined; // This will be our state handling
  */
 function setup() {
     // Create the canvas at our aspect ratio
-    canvas = createCanvas(9 * 64, 16 * 64);
+    canvas = createCanvas(16 * 64, 16 * 64);
     // Trigger window resizing so it scales
     windowResized();
 
-    // Start in the menu state
-    state = new Menu();
+    // Start in the Sisyphus state
+    state = new Sisyphus();
 }
 
 /**
@@ -32,6 +32,10 @@ function draw() {
     background(0);
 
     state.update();
+}
+
+function mousePressed() {
+    state.mousePressed();
 }
 
 /**
