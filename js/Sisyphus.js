@@ -10,7 +10,7 @@ class Sisyphus extends State {
         this.line = {
             x: 0.1,
             y: 0.5,
-            weight: 0.005,
+            weight: 0.004,
             length: 0.8,
             capLength: 0.015
         };
@@ -53,18 +53,31 @@ class Sisyphus extends State {
         // Left cap
         line(0, -this.line.capLength * width, 0, this.line.capLength * width);
 
+        // Left label
+        push();
         textStyle(NORMAL);
+        strokeWeight(0);
         textAlign(CENTER, TOP);
-        textSize(this.line.capLength * 3 * width);
-        text("0", 0, this.line.capLength * width);
+        textSize(this.line.capLength * 2 * width);
+        text("0", 0, this.line.capLength * 2 * width);
+        pop();
 
         // Right cap
         translate(this.line.length * width, 0);
         line(0, -this.line.capLength * width, 0, this.line.capLength * width);
-        text("1", 0, this.line.capLength * width);
+
+        // Right label
+        push();
+        textStyle(NORMAL);
+        strokeWeight(0);
+        textAlign(CENTER, TOP);
+        textSize(this.line.capLength * 2 * width);
+        text("1", 0, this.line.capLength * 2 * width);
+        pop();
 
         pop();
 
+        // Sisyphus... or is it the boulder? Both of them?? (as a point)
         push();
         noStroke();
         fill(0);

@@ -87,3 +87,45 @@ But there are questions! For instance... is that point just the boulder and you 
 Something I like (but don't know if I'm ready to tackle) with that juice-line, is that there's this truly bizarre thing going on where I'm contemplating grappling with animation and realism in this game but not in any other, and this is the *most abstract* representation... and perhaps there's just a clarity to that in the end, that "of course" you would incorporate those things in this case... for humour, for legibility? Unsure. I think it's clear that the game would work as it is in the gif, but I do want to explore further.
 
 (There's a line of thinking about the actual codebase and how to represent it efficiently, but for now I'm happy to just have a gif.)
+
+## Visual Prototyping Step (2025-08-29)
+
+I made some visual prototypes in Keynote to think through some of the coming issues. It's one of those games where a lot will be decided through visual representation so quite a lot can be accomplished in this way without fighting my way through the bullshit of implementation. 
+
+### General forms exploration using Sisyphus example
+
+![](./images/2025-08-29-lets-play-ancient-greek-punishment-1d-edition-visual-prototyping.001.png)
+
+This is an exploration of what the games would look like "in general". There are quite a few questions that come up even when diagramming sisyphus, which when I start thinking about it in these ways, really is the *simplest* of the games, and that's probably why I always start with it. Super legible, one idea really. Push. Fail. Well is that two ideas?
+
+Important points in these diagrams:
+
+- the idea of labelling the end-points - this is one key affordance for information that we get from a number line like this, and 0 and 1 in this case do a good job of commuicating the idea of progress/failure-to-progress.
+
+- the idea of a capture - really satisfying to me visually, I think there's always something good about respecting/keeping/capturing the larger visual language of an established kind of platform/form in this way, and it's clearly nice for things like legibility for the player, and may be a way to include further information? A caption like this might be a place for some kind of "key" to the information in the figure? Or perhaps a key can be a separate piece of the puzzle? Maybe?
+
+- the idea of multiple points to communicate multiple elements feels important to explore/think through. In Sisyphus I end up with a preference for *not* showing Sisyphus himself as a point (the player is Sisyphus), but I see in the other games (see below for diagramming) that it may be hard/impossible to avoid elsewhere. If it's used in the other games it maybe be hard not to include it in Sisyphus, which will reintroduce questions about the physical relationship between Sisyphus and the boulder.
+
+- missing is the question of instructions. They could be communicated in the caption, perhaps with language referring to the abstractions in the diagram? "Click rapidly to cause Sisyphus (S) to push the boulder (B) along the number line to 1." That kind of thing may be quite appealing for having a visual appearance of math discussion, but in reality being the instructions for a game (of a sort).
+
+So diagramming is good then huh.
+
+### Initial ideas for each myth
+
+![](./images/2025-08-29-lets-play-ancient-greek-punishment-1d-edition-visual-prototyping.002.png)
+
+I also went ahead and made preliminary diagrams for all the games to at least run into first problems with any of them. And there are problems that emerge right away when I combine the static diagram with any internal simulation on my end.
+
+**Sisyphus** we've already seen above. The boulder question looms largest there. (As I write that I wonder about the whole "other documents" structure of thing. Should I have a document to explore the design specifics of the specific minigames? Is the journal the right place for this?)
+
+**Prometheus** immediate introduces the need for a "body" (I think) to represent the player's position in the world. (I briefly imagined - literally just now - the idea of a point "flying in" from off-line, but that would break the one dimensionality so sadly not a thing I think.) This was my first moment to think of labelling the points with single letters representing their nature in the story. The question of colour matters here, but this is a case where I can imagine both being black points. The ideas of motion can be very similar (E flaps down with a slight sine bounce for flapping; P can jiggle in place causing E to rise) but we run into the question of how to represent the player's *liver* in amongst this. 
+
+How do you know when Prometheus is going to die? We have a number line, so an immediate answer could be that he slides down the line and thus represents a lower and a lower value over time until he reaches zero and dies before rising back to his previous position... but it's hard to imagine how to make it clear that's liver and not some kind of motion-in-the-world given that the eagle uses the number line to move. An alternative is something around colour - prometheus becomes redder or fainter. And another is around size, prometheus diminishes in size. Of these I'd favour the last one more just for now, so I suppose that's the starting point? It seems like a cheat - I doubt they have the idea of a meaning of the size of a point on a number line, but it may still fit the visual language well enough that it doesn't derail the idea?
+
+**Tantalus** is a good example of probably using colour to distinguish things. Fruit versus water versus Tantalus. It all looks pretty clear? You click high to move upward toward the fruit but it moves up and out of reach etc. As I note in the diagram, is it funny to have a little marker where the fruit it, and it moves off so you can see the tantlus reaches where it *was*? Perhaps.
+
+**Danaids** feels like it may be one of the hardest, but I really like the idea in the diagram of an unfilled circle. (Actually that's another potential to have for Prometheus? A growing circle of red internally that represents his dying/increasingly bloody state?) The bath circle being empty/full feels nice. If we wanted to be cute we could have it empty from top to bottom; we could also just have an alpha effect; can look at what's the best. If top to bottom there would be these sort of winks to a physicality of the numberline which I don't necessarily hate? 
+
+The other big one as noted is how to show the Danaid is carrying water? Another circle that can contain water? How to explain them being the same size? The Danaid itself filling with water? Too weird? May have to just try a couple to see how it looks/feels in action?
+
+**Zeno** seems like it would be the *easiest* to do in this format because it's such a mathematical paradox being represented. (And of course there's the mathematical solution, too, though we won't do it? Will we?) But I feel like it's maybe not easy? The "simplest" would be to reproduce the original game with the increasingly long floating point numbers and then "almost there" etc.? Maybe that's actually the answer, because there's no end game in sight with numerical resolution otherwise... maybe there's a more kind of algebraic/sum notation thing that can sub in somewhere along the line as well... as per the UI edition... to think about. Probably that's sounding fun somewhere in there? Actually this because an opportunity to change the nature of the line! Instead of an end cap at the left side it would turn into an arrow to represent that you're not at the terminal end of a line but rather somewhere along it... that's nice.
