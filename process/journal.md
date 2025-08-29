@@ -14,7 +14,7 @@ I guess there's also going to be something in this about its referentiality to t
 
 Anyway, getting started.
 
-## A canvas, a road to Math (2025-08-29)
+## A canvas, a road to Math (2025-08-27)
 
 A mere month since my last entry eh? Steaming along. I've got the basic framework in place now, including some thrashing around to make the canvas responsive the way I wanted. Plenty of stupidity in there (see the commit messages) but I got it without too much hell.
 
@@ -68,5 +68,22 @@ Unless I decide to fold in a little bit of character via animation? Like a sort 
 
 I feel like the "Math!" thing here is the winner on the day. I'm persuaded right now, but let's see tomorrow.
 
+## Math! (2025-08-28)
 
+Today I was able to prototype a sisyphus-math version of the 1D idea and... it felt right. I'm not 100% sure it's what I thought I wanted at the beginning, given that I had pretty clear ideas around it being 1D as represented in pixel art in the tradition of the original game. Here I'm again running into this question of whether I'm adapting the previous game (or really just the original game) or I'm adapting the myth anew each time. I suppose the answer is "both" because it's not like I can escape design decisions I made in prior versions... nor do I want to, I want that family resemblance they have (I've been reading Bowers' paper on the logic of annotated portfolios), it's part of "the thing."
 
+Re-reading the [why](./why.md) document suggests that I was open to what has happened, but it's pretty clear I was caught up in my original visual idea of a more block idea of one 1D would look like in a retro pixel game. My questions and interests are still supported by the math version I'm pursuing now, but they're just kind of... *better* supported by it?
+
+And that's probably because... well math has solved this problem of representation already, the idea of representing a line, points along a line, these are all things that there are mathematical notations/diagramming for, and so to use those means to fall in line with a well-established and near-universal set of symbols. It also ends up giving me a kind of destination form that I didn't have outside the term "1D"... by specifically translating/adapting into the mathematical representation of lines and points, I get a bunch of stuff that I can then look to to try to create these adaptations. It may not have all the answers, but it provides a place to *look for them* which is huge. This is part of the bigger questions of "adaptation" that I think are so interesting for videogames. (And this could so easily be its own design-oriented book, eh.)
+
+So I'm excited to pursue this... I made this gif which I think for me captures the excitement/"rightness" of this line of design:
+
+![Mathematical 1D view of sisyphus](./images/visual-history/2025-08-28-sisyphus-1d.gif)
+
+It's just so fun. It reminds me a lot of the moment of doing sisyphus with the slider... there's just the pleasure of seeing something odd translated across into something you didn't think would tell that story. It's funny.
+
+But there are questions! For instance... is that point just the boulder and you the player are pushing it (and are therefore sisyphus?). Is it sisyphus-and-the-boulder represented as a moving point on a line? Is it that there ought to be a *second* point representing the boulder (probably in a different colour?) and that they move together? If they move together is it in unison or is there some "juice" to sisyphus shoving the boulder upward, then catching up with it?
+
+Something I like (but don't know if I'm ready to tackle) with that juice-line, is that there's this truly bizarre thing going on where I'm contemplating grappling with animation and realism in this game but not in any other, and this is the *most abstract* representation... and perhaps there's just a clarity to that in the end, that "of course" you would incorporate those things in this case... for humour, for legibility? Unsure. I think it's clear that the game would work as it is in the gif, but I do want to explore further.
+
+(There's a line of thinking about the actual codebase and how to represent it efficiently, but for now I'm happy to just have a gif.)
