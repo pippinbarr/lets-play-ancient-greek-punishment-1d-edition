@@ -16,11 +16,11 @@ class Sisyphus extends State {
         };
         this.sisyphus = {
             x: 0.4,
-            size: 0.025
+            size: 0.03
         };
         this.boulder = {
-            x: 0.1,
-            size: 0.025
+            x: 0,
+            size: 0.03
         };
     }
 
@@ -32,6 +32,7 @@ class Sisyphus extends State {
         this.display();
 
         this.sisyphus.x = constrain(this.sisyphus.x - 0.001, 0, 1);
+        this.boulder.x = this.sisyphus.x + (this.sisyphus.size / 2 + this.boulder.size / 2);
     }
 
     display() {
@@ -77,16 +78,25 @@ class Sisyphus extends State {
 
         pop();
 
-        // Sisyphus... or is it the boulder? Both of them?? (as a point)
+        // Sisyphus
         push();
         noStroke();
         fill(0);
-        translate(this.sisyphus.x * this.line.length * width, 0);
-        circle(0, 0, this.sisyphus.size * width);
+        translate(this.sisyphus.x * (this.line.length * width), 0);
+        circle(0, 0, this.sisyphus.size * (this.line.length * width));
+        pop();
+
+        // Boulder
+        push();
+        noStroke();
+        fill(120, 74, 71);
+        translate(this.boulder.x * (this.line.length * width), 0);
+        circle(0, 0, this.boulder.size * (this.line.length * width));
         pop();
     }
 
     mousePressed() {
         this.sisyphus.x = constrain(this.sisyphus.x + 0.015, 0, 1);
+        this.boulder.x = this.sisyphus.x + (this.sisyphus.size / 2 + this.boulder.size / 2);
     }
 }
