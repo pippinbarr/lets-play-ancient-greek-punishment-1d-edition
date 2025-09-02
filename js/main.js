@@ -34,6 +34,9 @@ function draw() {
     state.update();
 }
 
+/**
+ * Feed the mouse pressed even through to the state
+ */
 function mousePressed() {
     state.mousePressed();
 }

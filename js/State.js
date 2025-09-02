@@ -23,4 +23,14 @@ class State {
     update() {
 
     }
+
+    /**
+     * All states should probably override handle mouse pressed since it's
+     * the key interaction
+     */
+    mousePressed() {
+        // If this gets called then that would be bad because it would mean
+        // the child state isn't dealing with the key interaction.
+        console.error("mousePressed went unhandled")
+    }
 }
