@@ -6,7 +6,7 @@
 
 ## Description
 
-*...!*
+*No more ungainly extra dimensions! Just one! No more retro cool! Just math! No more sweaty men rolling boulders! Just pushing points on the number line!*
 
 *Let's Play: Ancient Greek Punishment: 1D Edition* is ...
 
