@@ -129,3 +129,27 @@ How do you know when Prometheus is going to die? We have a number line, so an im
 The other big one as noted is how to show the Danaid is carrying water? Another circle that can contain water? How to explain them being the same size? The Danaid itself filling with water? Too weird? May have to just try a couple to see how it looks/feels in action?
 
 **Zeno** seems like it would be the *easiest* to do in this format because it's such a mathematical paradox being represented. (And of course there's the mathematical solution, too, though we won't do it? Will we?) But I feel like it's maybe not easy? The "simplest" would be to reproduce the original game with the increasingly long floating point numbers and then "almost there" etc.? Maybe that's actually the answer, because there's no end game in sight with numerical resolution otherwise... maybe there's a more kind of algebraic/sum notation thing that can sub in somewhere along the line as well... as per the UI edition... to think about. Probably that's sounding fun somewhere in there? Actually this because an opportunity to change the nature of the line! Instead of an end cap at the left side it would turn into an arrow to represent that you're not at the terminal end of a line but rather somewhere along it... that's nice.
+
+## Software Engineer (2025-09-08)
+
+Huh it's been a second since I did anything on this? Why? Why?
+
+Anyway my instinct in this exactly moment is to do some "engineering" where I could have an underlying class that just handles the representation of number lines with points of them, and then the minigame classes handle that set of points (and other stuff) in order to represent the actual experience of the game?
+
+So at its simplest a minigame could create/edit a datastructure with
+
+- Data about the figure
+    - Number and caption
+- Data about the line
+    - End caps (specifically flat or arrow, but also value/caption?)
+    - Markers (with labels)
+    - Orientation (esp. vertical/horizontal in terms of labels)
+- Data about the points
+    - Could be an array of simple point objects
+    - Color
+    - Position along the line (always between 0-1? -1 to 1 for Tantalus? Or he's just at 0.5? I guess that's funnier)
+    - Label
+    
+And then the underlying class (called what? Figure?) just does the work of displaying the data structure so that the minigame class can just handle manipulating that data... makes some amount of sense to me right now...
+
+So maybe doing that and getting super-fast representations of all the games in makes sense? And then working on some of the feel stuff it feels like I might need down the line? Already though I'm like... ugh what about that whole idea of "filling" a point (with water, with blood... I guess so long as I'm using that more than once it's alright to code it in)
