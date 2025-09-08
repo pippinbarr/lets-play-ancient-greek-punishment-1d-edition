@@ -1,7 +1,5 @@
 /**
  * Handles the Sisyphus minigame.
- * It may be that I want an intermediary class that handles common
- * gameplay functions? We'll see. It's weird doing this in p5.
  * 
  * Basically all the dimensions involved are relative to the width (or height
  * since right now the canvas is a square) as a way to control for my
@@ -12,13 +10,19 @@ class Sisyphus extends State {
     constructor() {
         super();
 
+        // Meta information about the figure
+        this.figureData = {
+            caption: "Figure 1. Sisyphus",
+            lineRotation: -PI / 4 // 45 degrees
+        };
         // The number line everything happens on
-        this.line = {
+        this.lineData = {
             x: 0.1,
             y: 0.5,
             weight: 0.004, // For strokeWeight
             length: 0.8,
-            capLength: 0.015 // For the flat end caps
+            capLength: 0.015, // For the flat end caps
+            labelsMatchLineRotation: true
         };
         // The point that is Sisyphus
         this.sisyphus = {
@@ -39,9 +43,9 @@ class Sisyphus extends State {
             progress: 1
         };
 
-        this.points = [this.sisyphus, this.boulder];
+        this.pointsData = [this.sisyphus, this.boulder];
 
-        this.figure = new Figure(this.line, this.points);
+        this.figure = new Figure(this.figureData, this.lineData, this.pointsData);
     }
 
     /**

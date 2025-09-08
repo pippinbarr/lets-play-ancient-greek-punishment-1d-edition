@@ -1,7 +1,9 @@
 class Figure {
-    constructor(line, points) {
+    constructor(figure, line, points) {
+        this.figure = figure;
         this.line = line;
         this.points = points;
+        this.invertColor = false;
     }
 
     create() {
@@ -15,13 +17,21 @@ class Figure {
     display() {
         background(255);
 
+        // Display the figure's capture
+        push();
+        textSize(32);
+        textAlign(CENTER, BOTTOM);
+        textStyle(ITALIC);
+        text(this.figure.caption, width / 2, height * 0.975);
+        pop();
+
         // Some pretty gross translation stuff I don't feel amazing about
         // in here. But mostly it just draws stuff. I used translation
         // thinking that might just be easier and I think on the balance
         // it probably was.
 
         translate(width / 2, height / 2);
-        rotate(-PI / 4);
+        rotate(this.figure.lineRotation);
         translate(-width / 2, -height / 2);
 
         push();
@@ -40,9 +50,11 @@ class Figure {
         push();
         textStyle(NORMAL);
         strokeWeight(0);
-        textAlign(CENTER, TOP);
+        textAlign(CENTER, CENTER);
         textSize(this.line.capLength * 2 * width);
-        text("0", 0, this.line.capLength * 2 * width);
+        translate(0, this.line.capLength * 3 * width);
+        if (!this.line.labelsMatchLineRotation) rotate(-this.figure.lineRotation);
+        text("0", 0, 0);
         pop();
 
         // Right cap
@@ -53,15 +65,18 @@ class Figure {
         push();
         textStyle(NORMAL);
         strokeWeight(0);
-        textAlign(CENTER, TOP);
+        textAlign(CENTER, CENTER);
         textSize(this.line.capLength * 2 * width);
-        text("1", 0, this.line.capLength * 2 * width);
+        translate(0, this.line.capLength * 3 * width);
+        if (!this.line.labelsMatchLineRotation) rotate(-this.figure.lineRotation);
+        text("1", 0, 0);
         pop();
 
         pop();
 
         // Points
         for (let point of this.points) {
+            if (!point.visible) continue;
             push();
             // Point
             noStroke();
@@ -70,11 +85,23 @@ class Figure {
             circle(0, 0, point.size * (this.line.length * width));
             // Label
 
-            translate(0, -this.line.capLength * 2 * width);
-            textAlign(CENTER, BOTTOM);
+            translate(0, -this.line.capLength * 3 * width);
+            textAlign(CENTER, CENTER);
             textSize(this.line.capLength * 2 * width);
+
+            if (!this.line.labelsMatchLineRotation) rotate(-this.figure.lineRotation);
             text(point.label, 0, 0);
             pop();
         }
+
+        // Invert if we are meant to
+        if (this.invertColor) {
+            filter(INVERT);
+        }
+
+    }
+
+    invert() {
+        this.invertColor = !this.invertColor;
     }
 }

@@ -21,8 +21,8 @@ function setup() {
     // Trigger window resizing so it scales
     windowResized();
 
-    // Start in the Sisyphus state
-    state = new Sisyphus();
+    // Starting state
+    state = new Prometheus();
 }
 
 /**
