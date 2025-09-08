@@ -23,13 +23,25 @@ class Sisyphus extends State {
         // The point that is Sisyphus
         this.sisyphus = {
             x: 0.4, // How far along the line he is
-            size: 0.03 // The size of his dot
+            size: 0.03, // The size of his dot
+            label: "S",
+            fill: "#000000",
+            alpha: 255,
+            progress: 1
         };
         // The point that is the boulder
         this.boulder = {
             x: 0,
-            size: 0.03
+            size: 0.03,
+            label: "B",
+            fill: "#a86832",
+            alpha: 255,
+            progress: 1
         };
+
+        this.points = [this.sisyphus, this.boulder];
+
+        this.figure = new Figure(this.line, this.points);
     }
 
     /**
@@ -55,68 +67,7 @@ class Sisyphus extends State {
      * Display the whole thing
      */
     display() {
-        background(255);
-
-        // Some pretty gross translation stuff I don't feel amazing about
-        // in here. But mostly it just draws stuff. I used translation
-        // thinking that might just be easier and I think on the balance
-        // it probably was.
-
-        translate(width / 2, height / 2);
-        rotate(-PI / 4);
-        translate(-width / 2, -height / 2);
-
-        push();
-        translate(this.line.x * width, this.line.y * height);
-
-        push();
-        strokeWeight(this.line.weight * width);
-        stroke(0);
-        strokeCap(SQUARE);
-        // Main line
-        line(0, 0, this.line.length * width, 0);
-        // Left cap
-        line(0, -this.line.capLength * width, 0, this.line.capLength * width);
-
-        // Left label
-        push();
-        textStyle(NORMAL);
-        strokeWeight(0);
-        textAlign(CENTER, TOP);
-        textSize(this.line.capLength * 2 * width);
-        text("0", 0, this.line.capLength * 2 * width);
-        pop();
-
-        // Right cap
-        translate(this.line.length * width, 0);
-        line(0, -this.line.capLength * width, 0, this.line.capLength * width);
-
-        // Right label
-        push();
-        textStyle(NORMAL);
-        strokeWeight(0);
-        textAlign(CENTER, TOP);
-        textSize(this.line.capLength * 2 * width);
-        text("1", 0, this.line.capLength * 2 * width);
-        pop();
-
-        pop();
-
-        // Sisyphus
-        push();
-        noStroke();
-        fill(0);
-        translate(this.sisyphus.x * (this.line.length * width), 0);
-        circle(0, 0, this.sisyphus.size * (this.line.length * width));
-        pop();
-
-        // Boulder
-        push();
-        noStroke();
-        fill(120, 74, 71);
-        translate(this.boulder.x * (this.line.length * width), 0);
-        circle(0, 0, this.boulder.size * (this.line.length * width));
-        pop();
+        this.figure.display();
     }
 
     /**
