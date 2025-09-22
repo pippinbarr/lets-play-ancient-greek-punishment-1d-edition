@@ -153,3 +153,15 @@ So at its simplest a minigame could create/edit a datastructure with
 And then the underlying class (called what? Figure?) just does the work of displaying the data structure so that the minigame class can just handle manipulating that data... makes some amount of sense to me right now...
 
 So maybe doing that and getting super-fast representations of all the games in makes sense? And then working on some of the feel stuff it feels like I might need down the line? Already though I'm like... ugh what about that whole idea of "filling" a point (with water, with blood... I guess so long as I'm using that more than once it's alright to code it in)
+
+## Inching along (2025-09-22)
+
+Been a while since I did a lot to this project but it's still on my mind and I should really just push through if I can because I think most of it is "secretly solved" in my head design-wise... as in I think I'll maybe just be able to choose the design moves and solution once I actually confront myself with the questions.
+
+Found that there is indeed [a tweening library for p5](https://github.com/Milchreis/p5.tween) so I'm hoping I can use that for some of the animation elements. Looks like it has events and so on and all that good stuff so shoooouuuuuuld make my life easier since it can "just" tween numberline values and my figure code will handle what that looks like frame by frame? Famous last words.
+
+Mainly thinking about that because it feels like the mathsy simplicity is going to demand relatively smooth animation as things happen. I'm lightly concerned about how tweens will/won't interact withs something like Sisyphus and the boulder... how I handle that is a bit stressful... I guess tweens can be cancelled? They can be paused it looks like... unsure what that will mean? Sisyphus is maybe one of the hardest because it's about that physical interaction between man and boulder which was handled by sprite animation previously but now feels like it needs a little extra juice to look right... might have to be one of the last I work on? Maybe prometheus is a sensible starting point for tweens... tween in the bird, tween the thrashing, tween the peck, tween the flap up, etc... and have them shift around as needed,
+
+while also writing the code for a depleting gauge in Prometheus's point. Seems smart to do that.
+
+But there are tons of other questions. Should the Daniad *be* a bucket or have a bucket? If Sisyphus is the way he is then they presumably need a bucket point, not just a person. All that crap you know?
