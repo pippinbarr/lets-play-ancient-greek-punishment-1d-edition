@@ -46,6 +46,13 @@ class Prometheus extends State {
         this.pointsData = [this.prometheus, this.eagle];
 
         this.figure = new Figure(this.figureData, this.lineData, this.pointsData);
+
+        // Just trying out a tween...
+        p5.tween.EASINGS.test = (t) => t + 0.25;
+        this.eagleTween = p5.tween.manager.addTween(this.eagle, "inbound");
+        this.eagleTween.addMotion('x', 0, 1000, 'test');
+        this.eagleTween.startTween();
+        // It works
     }
 
     /**
@@ -62,6 +69,7 @@ class Prometheus extends State {
         // Display the line and points
         this.display();
 
+        return;
         switch (this.eagle.state) {
             case "done":
                 break;
