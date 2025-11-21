@@ -19,7 +19,7 @@ let stateIndex = 0; // Just for switching between them quickly for now
  */
 function setup() {
     // Create the canvas at our aspect ratio
-    canvas = createCanvas(16 * 64, 16 * 64);
+    canvas = createCanvas(8 * 64, 8 * 64);
     // Trigger window resizing so it scales
     windowResized();
 
@@ -47,8 +47,10 @@ function mousePressed() {
  * For testing purposes if we press any key we will switch to the next game
  */
 function keyPressed() {
-    stateIndex = (stateIndex + 1) % states.length;
-    state = new states[stateIndex];
+    if (keyCode === RIGHT_ARROW) {
+        stateIndex = (stateIndex + 1) % states.length;
+        state = new states[stateIndex];
+    }
 }
 
 /**

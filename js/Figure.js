@@ -17,12 +17,20 @@ class Figure {
     display() {
         background(255);
 
-        // Display the figure's capture
+        // Display the figure's caption
         push();
-        textSize(32);
-        textAlign(CENTER, BOTTOM);
-        textStyle(ITALIC);
-        text(this.figure.caption, width / 2, height * 0.975);
+        textSize(this.line.capLength * 2 * width);
+        textAlign(LEFT, BOTTOM);
+        textStyle(BOLDITALIC);
+        text(this.figure.caption, 0.1 * width, height * 0.9);
+        pop();
+
+        // Display the figure's subcaption
+        push();
+        textSize(this.line.capLength * 2 * width);
+        textAlign(LEFT, BOTTOM);
+        rectMode(CORNER);
+        text(this.figure.subcaption, 0.1 * width, height * 0.975, 0.8 * width);
         pop();
 
         // Some pretty gross translation stuff I don't feel amazing about
@@ -69,7 +77,7 @@ class Figure {
         textSize(this.line.capLength * 2 * width);
         translate(0, this.line.capLength * 3 * width);
         if (!this.line.labelsMatchLineRotation) rotate(-this.figure.lineRotation);
-        text("1", 0, 0);
+        text("1.0", 0, 0);
         pop();
 
         pop();

@@ -17,7 +17,7 @@ class Prometheus extends State {
             x: 0.1,
             y: 0.5,
             weight: 0.004, // For strokeWeight
-            length: 0.8,
+            length: 0.75,
             capLength: 0.015, // For the flat end caps
             labelsMatchLineRotation: false,
         };
