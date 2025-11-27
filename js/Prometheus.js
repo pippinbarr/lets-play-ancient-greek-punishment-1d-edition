@@ -10,14 +10,15 @@ class Prometheus extends State {
         // Meta information about the figure
         this.figureData = {
             caption: "Figure 2. Prometheus",
+            subcaption: "Click rapidly to make point P (Prometheus) writhe to scare off point E (the eagle) for a little while.",
             lineRotation: -PI / 2 // 90 degrees
         };
         // The number line everything happens on
         this.lineData = {
-            x: 0.1,
+            x: 0.2,
             y: 0.5,
             weight: 0.004, // For strokeWeight
-            length: 0.75,
+            length: 0.66,
             capLength: 0.015, // For the flat end caps
             labelsMatchLineRotation: false,
         };
@@ -29,30 +30,48 @@ class Prometheus extends State {
             fill: "#000000",
             alpha: 255,
             progress: 1,
-            visible: true
+            visible: true,
         };
         // The point that is the eagle
         this.eagle = {
             x: 1,
             size: 0.03,
             label: "E",
-            fill: "#aaaaaa",
+            fill: "#000000",
             alpha: 255,
             progress: 1,
             state: "inbound",
             visible: true
         };
 
+        this.writheMin = 2;
+        this.writhe = false;
+
+
         this.pointsData = [this.prometheus, this.eagle];
 
         this.figure = new Figure(this.figureData, this.lineData, this.pointsData);
 
-        // Just trying out a tween...
-        p5.tween.EASINGS.test = (t) => t + 0.25;
-        this.eagleTween = p5.tween.manager.addTween(this.eagle, "inbound");
-        this.eagleTween.addMotion('x', 0, 1000, 'test');
-        this.eagleTween.startTween();
-        // It works
+        this.inputEnabled = true;
+
+        this.inputInterval = setInterval(() => {
+            this.writhe = this.clicks >= this.writheMin;
+            this.clicks = 0;
+            if (!this.writhe) {
+                this.prometheus.x = 0;
+                this.writheDir = 1;
+            }
+        }, 250);
+
+        this.writheDir = 1;
+        this.writheInterval = setInterval(() => {
+            if (this.writhe) {
+                this.prometheus.x += this.writheDir * 0.01;
+                this.writheDir *= -1;
+            }
+        }, 100);
+
+        this.hoverX = 0.2;
     }
 
     /**
@@ -69,25 +88,46 @@ class Prometheus extends State {
         // Display the line and points
         this.display();
 
-        return;
         switch (this.eagle.state) {
             case "done":
                 break;
 
             case "inbound":
                 this.eagle.x = constrain(this.eagle.x - 0.025, 0 + this.prometheus.size, 1);
-                if (this.eagle.x === this.prometheus.size) {
+                if (this.writhe && this.eagle.x - this.prometheus.x < this.prometheus.size * 2) {
+                    this.eagle.state = "hover-up";
+                }
+                else if (this.eagle.x === this.prometheus.size) {
                     this.eagle.state = "landed";
                 }
                 break;
 
+            case "hover-up":
+                this.eagle.x += 0.025;
+                if (this.eagle.x >= this.hoverX) {
+                    this.eagle.x = this.hoverX;
+                    this.eagle.state = "hovering";
+                    this.hoverTimeout = setTimeout(() => {
+                        this.eagle.state = "inbound";
+                    }, 2000);
+                }
+                break;
+
+            case "hovering":
+                break;
+
             case "landed":
                 // A poor simulation of the eagle pecking for a bit
-                if (!this.eagle.timeout) {
-                    this.eagle.timeout = setTimeout(() => {
+                if (!this.eagle.peckTimeout) {
+                    this.eagle.peckTimeout = setTimeout(() => {
                         this.eagle.state = "outbound";
-                        this.eagle.timeout = null;
-                    }, 1000);
+                        this.eagle.peckTimeout = null;
+                    }, 5000);
+                }
+                if (this.writhe) {
+                    clearTimeout(this.eagle.peckTimeout);
+                    this.eagle.peckTimeout = null;
+                    this.eagle.state = "hover-up";
                 }
                 break;
 
@@ -119,6 +159,8 @@ class Prometheus extends State {
      * What happens when you click? A little push.
      */
     mousePressed() {
-
+        if (this.inputEnabled) {
+            this.clicks++;
+        }
     }
 }

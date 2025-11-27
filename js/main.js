@@ -12,7 +12,7 @@ let canvas = undefined; // A reference to the canvas for scaling with CSS
 
 let state = undefined; // This will be our state handling
 const states = [Sisyphus, Prometheus, Tantalus, Danaids, Zeno];
-let stateIndex = 0; // Just for switching between them quickly for now
+let stateIndex = 1; // Just for switching between them quickly for now
 
 /**
  * Create the canvas, probably more
@@ -24,7 +24,7 @@ function setup() {
     windowResized();
 
     // Starting state
-    state = new Sisyphus();
+    state = new states[stateIndex];
 }
 
 /**

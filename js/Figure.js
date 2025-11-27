@@ -104,7 +104,7 @@ class Figure {
 
         // Invert if we are meant to
         if (this.invertColor) {
-            filter(INVERT);
+            // filter(INVERT);
         }
 
     }
