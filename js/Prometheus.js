@@ -26,6 +26,7 @@ class Prometheus extends State {
         this.prometheus = {
             x: 0, // How far along the line he is
             size: 0.03, // The size of his dot
+            maxSize: 0.03,
             label: "P",
             fill: "#000000",
             alpha: 255,
@@ -119,10 +120,7 @@ class Prometheus extends State {
             case "landed":
                 // A poor simulation of the eagle pecking for a bit
                 if (!this.eagle.peckTimeout) {
-                    this.eagle.peckTimeout = setTimeout(() => {
-                        this.eagle.state = "outbound";
-                        this.eagle.peckTimeout = null;
-                    }, 5000);
+                    this.startPeck();
                 }
                 if (this.writhe) {
                     clearTimeout(this.eagle.peckTimeout);
@@ -146,6 +144,21 @@ class Prometheus extends State {
                 }
                 break;
         }
+    }
+
+    startPeck() {
+        this.eagle.peckTimeout = setTimeout(() => {
+            this.prometheus.size -= this.prometheus.maxSize / 10;
+            this.eagle.x = this.prometheus.x + this.prometheus.size / 2 + this.eagle.size / 2;
+            if (this.prometheus.size <= 0) {
+                this.eagle.state = "outbound";
+                this.prometheus.size = 0;
+                this.eagle.peckTimeout = null;
+            }
+            else {
+                this.startPeck();
+            }
+        }, random(1000, 4000));
     }
 
     /**
