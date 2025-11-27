@@ -9,8 +9,10 @@ class Prometheus extends State {
 
         // Meta information about the figure
         this.figureData = {
-            caption: "Figure 2. Prometheus",
+            caption: "Figure 2. Prometheus (Day 1)",
             subcaption: "Click rapidly to make point P (Prometheus) writhe to scare off point E (the eagle) for a little while.",
+            day: 1,
+            captionBase: "Figure 2. Prometheus (Day %%%DAY%%%)",
             lineRotation: -PI / 2 // 90 degrees
         };
         // The number line everything happens on
@@ -89,6 +91,10 @@ class Prometheus extends State {
         // Display the line and points
         this.display();
 
+        console.log(this.figureData.day);
+        console.log(this.figureData.caption);
+        console.log(this.figureData.captionBase);
+
         switch (this.eagle.state) {
             case "done":
                 break;
@@ -136,6 +142,8 @@ class Prometheus extends State {
                     this.eagle.visible = false;
                     this.figure.invert();
                     this.eagle.timeout = setTimeout(() => {
+                        this.figureData.day++;
+                        this.updateCaption();
                         this.figure.invert();
                         this.eagle.state = "inbound";
                         this.eagle.visible = true;
@@ -146,9 +154,14 @@ class Prometheus extends State {
         }
     }
 
+    updateCaption() {
+        this.figureData.caption = this.figureData.captionBase.replace("%%%DAY%%%", this.figureData.day);
+        console.log(this.figureData.caption);
+    }
+
     startPeck() {
         this.eagle.peckTimeout = setTimeout(() => {
-            this.prometheus.size -= this.prometheus.maxSize / 10;
+            this.prometheus.size -= this.prometheus.maxSize / 1;
             this.eagle.x = this.prometheus.x + this.prometheus.size / 2 + this.eagle.size / 2;
             if (this.prometheus.size <= 0) {
                 this.eagle.state = "outbound";
