@@ -17,32 +17,59 @@ class Figure {
     display() {
         background(255);
 
-        // Display the figure's caption
         push();
-        textSize(this.line.capLength * 2 * width);
-        textAlign(LEFT, BOTTOM);
-        textStyle(BOLDITALIC);
-        text(this.figure.caption, 0.1 * width, height * 0.9);
-        pop();
 
-        // Display the figure's subcaption
-        push();
-        textSize(this.line.capLength * 2 * width);
-        textAlign(LEFT, BOTTOM);
-        rectMode(CORNER);
-        text(this.figure.subcaption, 0.1 * width, height * 0.975, 0.8 * width);
-        pop();
+        this.displayCaption();
+
+        this.displaySubcaption();
 
         // Some pretty gross translation stuff I don't feel amazing about
         // in here. But mostly it just draws stuff. I used translation
         // thinking that might just be easier and I think on the balance
         // it probably was.
 
+        push(); // Main push
+
         translate(width / 2, height / 2);
         rotate(this.figure.lineRotation);
         translate(-width / 2, -height / 2);
 
+        this.displayLine();
+
+        this.displayPoints();
+
+        pop();
+
+        // Invert if we are meant to
+        if (this.invertColor) {
+            filter(INVERT, false);
+        }
+
+        pop();
+    }
+
+    displayCaption() {
+        // Display the figure's caption
         push();
+        textSize(this.line.capLength * 2 * width);
+        textAlign(LEFT, BOTTOM);
+        textStyle(BOLDITALIC);
+        text(this.figure.caption, 0.1 * width, height * 0.9);
+        pop(); // Caption
+    }
+
+    displaySubcaption() {
+        // Display the figure's subcaption
+        push();
+        textSize(this.line.capLength * 2 * width);
+        textAlign(LEFT, BOTTOM);
+        rectMode(CORNER);
+        text(this.figure.subcaption, 0.1 * width, height * 0.975, 0.8 * width);
+        pop(); // Subcaption
+    }
+
+    displayLine() {
+        push(); // To deal with positioning on the line
         translate(this.line.x * width, this.line.y * height);
 
         push();
@@ -80,8 +107,10 @@ class Figure {
         text("1.0", 0, 0);
         pop();
 
-        pop();
+        pop(); // Line
+    }
 
+    displayPoints() {
         // Points
         for (let point of this.points) {
             if (!point.visible) continue;
@@ -101,12 +130,6 @@ class Figure {
             text(point.label, 0, 0);
             pop();
         }
-
-        // Invert if we are meant to
-        if (this.invertColor) {
-            // filter(INVERT);
-        }
-
     }
 
     invert() {
